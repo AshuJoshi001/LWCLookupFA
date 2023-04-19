@@ -1,0 +1,29 @@
+<template>
+    <lightning-card>
+        <div class="slds-form-element slds-grid">
+            <div class="slds-col slds-no-flex" >
+                <lightning-icon style="margin: 10px;" icon-name={iconName} size="small" alternative-text="icon"></lightning-icon>
+            </div>
+            <div class="slds-col">
+                <strong><p style="margin: 10px; font-size: 15px">{objectApiName}</p></strong>
+                <lightning-input class="input-style input-lable" type="text" id="search"  value={searchString} placeholder="Search..." onchange={search}></lightning-input>
+            </div>
+        </div>
+        
+    <template if:true={records.length}>
+        <ul>
+            <template for:each={records} for:item="record">
+                <li key={record.Id}>
+                    <lightning-icon icon-name={iconName} size="small" alternative-text="icon" style="margin: 5px;" ></lightning-icon>  
+                    <a onclick={selectRecord} data-record={record.Id}>{record.Name}</a>
+                </li>
+            </template>
+        </ul>
+    </template>
+    <template if:true={selectedRecord}>
+        <div class="slds-form-element">
+            <lightning-input type="text" id="selectedRecord" label="Selected Record" value={selectedRecord.Name} readonly></lightning-input>
+        </div>
+    </template>
+    </lightning-card>
+</template>
